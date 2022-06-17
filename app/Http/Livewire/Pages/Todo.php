@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages;
 
+use App\Http\Livewire\Events\ExemploUm;
 use App\Models\Todo as ModelsTodo;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,6 +20,25 @@ class Todo extends Component
         'title' => 'required|min:3',
         'description' => 'nullable|min:3',
     ];
+
+    // Special Syntax: ['echo:{channel},{event}' => '{method}']
+    protected $listeners = ['echo:orders,.ExemploUm' => 'notifyNewOrder'];
+
+    public function mount()
+    {
+        // return $this->newEvent();
+    }
+
+    public function newEvent()
+    {
+        return event(new ExemploUm);
+    }
+
+    public function notifyNewOrder()
+    {
+        $this->title = 'Evento chegou';
+        $this->store();
+    }
 
     public function updated($field)
     {
@@ -42,6 +62,11 @@ class Todo extends Component
 
         $this->salvo = true;
         $this->dispatchBrowserEvent('todo-added');
+    }
+
+    public function delete($id)
+    {
+        ModelsTodo::destroy($id);
     }
 
     public function render()
