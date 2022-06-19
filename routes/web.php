@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\StatusLiked;
 use App\Http\Livewire\Pages\Exemplos;
 use App\Http\Livewire\Pages\Todo;
 use App\Http\Livewire\Pages\TodoAlpine;
@@ -27,3 +28,9 @@ Route::get('/todo', Todo::class)->name('todo');
 Route::get('/todo-modal', TodoModal::class)->name('todo-modal');
 Route::get('/todo-alpine', TodoAlpine::class)->name('todo-alpine');
 Route::get('/todo-alpine-inline', TodoAlpineInline::class)->name('todo-alpine-inline');
+
+
+Route::get('test', function () {
+    event(new StatusLiked('Someone'));
+    return "Event has been sent!";
+});

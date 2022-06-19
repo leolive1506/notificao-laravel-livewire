@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages;
 
+use App\Http\Livewire\Events\ExemploDois;
 use App\Http\Livewire\Events\ExemploUm;
 use App\Models\Todo as ModelsTodo;
 use Livewire\Component;
@@ -21,12 +22,11 @@ class Todo extends Component
         'description' => 'nullable|min:3',
     ];
 
-    // Special Syntax: ['echo:{channel},{event}' => '{method}']
-    protected $listeners = ['echo:orders,.ExemploUm' => 'notifyNewOrder'];
 
-    public function mount()
+    public function getListeners()
     {
-        // return $this->newEvent();
+        // Special Syntax: ['echo:{channel},{event}' => '{method}']
+        return ['echo:orders,.ExemploUm' => 'notifyUm', 'echo:new-card,.ExemploDois' => 'notifyDois'];
     }
 
     public function newEvent()
@@ -34,9 +34,20 @@ class Todo extends Component
         return event(new ExemploUm);
     }
 
-    public function notifyNewOrder()
+    public function newEventDois($id)
+    {
+        return event(new ExemploDois(ModelsTodo::class, $id, 'title'));
+    }
+
+    public function notifyUm()
     {
         $this->title = 'Evento chegou';
+        $this->store();
+    }
+
+    public function notifyDois()
+    {
+        $this->title = 'Evento dois chegou';
         $this->store();
     }
 

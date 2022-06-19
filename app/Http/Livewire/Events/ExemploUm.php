@@ -4,11 +4,11 @@ namespace App\Http\Livewire\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ExemploUm implements ShouldBroadcastNow
+class ExemploUm implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

@@ -18,11 +18,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Pusher = require('pusher-js');
 import Echo from 'laravel-echo';
-
+console.log('oi');
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '466f0b07696907f000b2',
-    cluster: 'us2',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true,
     encrypted: true,
     disableStats: true,
@@ -31,8 +31,15 @@ window.Echo = new Echo({
 // console.log(Echo)
 // console.log(window.Echo)
 
+const paragrafo = document.querySelector('#texto-dinamico')
 
 window.Echo.channel('orders')
     .listen('.ExemploUm', (e) => {
         console.log(e);
+    });
+
+window.Echo.channel('new-card')
+    .listen('.ExemploDois', (e) => {
+        console.log(e.id)
+        console.log(paragrafo)
     });

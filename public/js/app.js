@@ -5259,18 +5259,24 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 
+console.log('oi');
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: '466f0b07696907f000b2',
-  cluster: 'us2',
+  key: "466f0b07696907f000b2",
+  cluster: "us2",
   forceTLS: true,
   encrypted: true,
   disableStats: true
 }); // console.log(Echo)
 // console.log(window.Echo)
 
+var paragrafo = document.querySelector('#texto-dinamico');
 window.Echo.channel('orders').listen('.ExemploUm', function (e) {
   console.log(e);
+});
+window.Echo.channel('new-card').listen('.ExemploDois', function (e) {
+  console.log(e.id);
+  console.log(paragrafo);
 });
 
 /***/ }),
