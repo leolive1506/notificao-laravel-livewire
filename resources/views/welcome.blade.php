@@ -81,7 +81,6 @@
 
 	  // Bind a function to a Event (the full Laravel class)
 	  channel.bind('my-event', function(data) {
-        alert(data.message);
 		var existingNotifications = notifications.html();
 		var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
 		var newNotificationHtml = `
