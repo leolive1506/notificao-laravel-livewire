@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pages;
 use App\Http\Livewire\Events\ExemploDois;
 use App\Http\Livewire\Events\ExemploUm;
 use App\Models\Todo as ModelsTodo;
+use App\Services\Notifications;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -68,11 +69,12 @@ class Todo extends Component
             'description' => $this->description,
         ]);
 
-        $this->resetPage();
-        $this->reset('title', 'description');
+        // $this->resetPage();
+        // $this->reset('title', 'description');
 
         $this->salvo = true;
         $this->dispatchBrowserEvent('todo-added');
+        app(Notifications::class)->allUsers(['message' => 'novo tudo mermão', 'href' => route('todo')]);
     }
 
     public function delete($id)

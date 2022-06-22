@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Notify;
 use App\Events\StatusLiked;
 use App\Http\Livewire\Pages\Exemplos;
 use App\Http\Livewire\Pages\Todo;
@@ -31,6 +32,6 @@ Route::get('/todo-alpine-inline', TodoAlpineInline::class)->name('todo-alpine-in
 
 
 Route::get('test', function () {
-    event(new StatusLiked('Someone'));
+    event(new Notify('Someone'));
     return "Event has been sent!";
 });
